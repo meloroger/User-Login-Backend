@@ -1,0 +1,183 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.hmelocosta.app</groupId>
+  <artifactId>userbackend</artifactId>
+  <packaging>war</packaging>
+  <version>1.0</version>
+  <name>userbackend CRUD MongDB Webapp</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-bundle</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-core</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet.api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>${org.json.version}</version>
+		</dependency>
+
+		<!-- Mondo Database Jongo dependendencies -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>${mongodb.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jongo</groupId>
+			<artifactId>jongo</artifactId>
+			<version>${jongo.version}</version>
+		</dependency>
+
+		<!-- Must have jackson dependencis once you add Mongo dependencies -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${fasterxml.jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${fasterxml.jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${fasterxml.jackson.version}</version>
+		</dependency>
+
+		<!-- POJO Mapping? -->
+		<dependency>
+			<groupId>org.mongojack</groupId>
+			<artifactId>mongojack</artifactId>
+			<version>${mongojack.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>userapp</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.version}</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<testSource>${jdk.version}</testSource>
+					<testTarget>${jdk.version}</testTarget>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${maven.war.version}</version>
+				<configuration>
+					<warName>userapp</warName>
+				</configuration>
+			</plugin>
+			<plugin>
+			  <groupId>org.eclipse.jetty</groupId>
+			  <artifactId>jetty-maven-plugin</artifactId>
+			  <version>${jetty.version}</version>
+			  <configuration>
+				<scanIntervalSeconds>10</scanIntervalSeconds>
+				<webApp>
+					 <contextPath>/</contextPath>
+				</webApp>
+			  </configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	 <profiles>
+		<profile>
+			<id>enunciate</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.webcohesion.enunciate</groupId>
+						<artifactId>enunciate-maven-plugin</artifactId>
+						<version>${enunciate.version}</version>
+						<configuration>
+						  <sourcepath-includes>
+							<sourcepath-include>
+							  <groupId>com.pmk.app.web.rest</groupId>
+							</sourcepath-include>
+							<sourcepath-include>
+							  <groupId>com.external</groupId>
+							  <artifactId>external</artifactId>
+							</sourcepath-include>
+						  </sourcepath-includes>
+						</configuration>
+						<executions>
+						  <execution>
+							<goals>
+							  <goal>assemble</goal>
+							</goals>
+						  </execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	 </profiles>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jdk.version>1.8</jdk.version>
+		<maven.compiler.version>2.3.2</maven.compiler.version>
+		<maven.war.version>2.6</maven.war.version>
+		<jetty.version>9.2.11.v20150529</jetty.version>
+		<jersey.version>1.19.4</jersey.version>
+		<servlet.api.version>3.1.0</servlet.api.version>
+		<enunciate.version>2.10.1</enunciate.version>
+		<json.webtoken.version>0.9.0</json.webtoken.version>
+		<org.json.version>20171018</org.json.version>
+
+
+		<mongodb.version>3.6.1</mongodb.version>
+		<!--jongo.version>1.3.0</jongo.version-->
+		<jongo.version>1.4.0</jongo.version>
+
+		<fasterxml.jackson.version>2.9.7</fasterxml.jackson.version>
+
+		<!-- Pojo mapping? -->
+		<mongojack.version>2.9.4</mongojack.version>
+	</properties>
+</project>
