@@ -175,7 +175,7 @@
 		<!--jongo.version>1.3.0</jongo.version-->
 		<jongo.version>1.4.0</jongo.version>
 
-		<fasterxml.jackson.version>2.9.7</fasterxml.jackson.version>
+		<fasterxml.jackson.version>2.10.0</fasterxml.jackson.version>
 
 		<!-- Pojo mapping? -->
 		<mongojack.version>2.9.4</mongojack.version>
